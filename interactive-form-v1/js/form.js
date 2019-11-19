@@ -1,6 +1,7 @@
-
-                            //FOCUS ON THE FIRST FIELD//
-//using jQuery addEventListener (load?), have the cursor appear on the Name field
+alert('this is a test');
+                     
+                     //FOCUS ON THE FIRST FIELD//
+//using jQuery addEventListener (auto focus), have the cursor appear on the Name field
 
 
                             //JOB ROLE SECTION//
