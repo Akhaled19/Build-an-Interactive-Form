@@ -1,11 +1,22 @@
-alert('this is a test');
+
                      
                      //FOCUS ON THE FIRST FIELD//
-//using jQuery addEventListener (auto focus), have the cursor appear on the Name field
+//using jQuery (focus), have the cursor appear on the Name field
+jQuery('#name').focus();
 
 
                             //JOB ROLE SECTION//
-//using jQuery create a new element (text field) when user select 'other' from the Job Role menu 
+//using function & jQuery create a new element (text field) when user select 'other' from the Job Role menu 
+
+jQuery('#other-title').hide();
+
+jQuery('#title').on('change', function(){
+  if(jQuery(this).val()==='other') {
+    jQuery('#other-title').show();
+  }else{
+    jQuery('#other-title').hide();
+   }
+});
 
 
                              //T-SHIRT SECTION//
