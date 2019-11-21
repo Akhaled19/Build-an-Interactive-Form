@@ -1,5 +1,12 @@
+              //GLOBAL Variables//
+  const $cornflowerblue = jQuery('#color option[value="cornflowerblue"]');
+  const $darkslategrey = jQuery('#color option[value="darkslategrey"]');
+  const $gold = jQuery('#color option[value="gold"]');
+  const $tomato =  jQuery('#color option[value="tomato"]');
+  const $steelblue = jQuery('#color option[value="steelblue"]');
+  const $dimgrey = jQuery('#color option[value="dimgrey"]');
+  
 
-                     
                      //FOCUS ON THE FIRST FIELD//
 //using jQuery (focus), have the cursor appear on the Name field
 jQuery('#name').focus();
@@ -20,9 +27,39 @@ jQuery('#title').on('change', function(){
 
 
                              //T-SHIRT SECTION//
-//using jQuery(function?) to hide color options until t-shirt theme is selected 
+//using jQuery attr property to hide color options until t-shirt theme is selected
+//& the color filed reads "Please select a T-shirt theme" 
+jQuery('#color').attr('disabled', 'disabled');
+jQuery('#color').prepend('<option value="select a theme" selected="selected">Please select a T-shirt theme</option>');
+
 
 //using jQuery(function?) to show color options once t-shirt theme is selected 
+//using a function & declared global variables to show colors only for corresponding themes
+jQuery('#design').on('change',function(){
+  if(jQuery(this).val()==='js puns'){
+    jQuery('#color').attr('disabled', false);
+    jQuery($dimgrey).hide();
+    jQuery($steelblue).hide();
+    jQuery($tomato).hide();
+    jQuery($gold).show();
+    jQuery($darkslategrey).show();
+    jQuery($cornflowerblue).show();
+
+  }else if(jQuery(this).val()==='heart js'){
+    jQuery('#color').attr('disabled', false);
+    jQuery($gold).hide();
+    jQuery($darkslategrey).hide();
+    jQuery($cornflowerblue).hide();
+    jQuery($dimgrey).show();
+    jQuery($steelblue).show();
+    jQuery($tomato).show();
+    
+  }else{
+    jQuery('#color').attr('disabled', 'disabled');
+  }
+});
+
+
 
 //using jQuery(what?) to prevent users from selecting two or activities that are at the same time 
 
