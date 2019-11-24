@@ -6,6 +6,13 @@
   const $steelblue = jQuery('#color option[value="steelblue"]');
   const $dimgrey = jQuery('#color option[value="dimgrey"]');
   
+  const $all= jQuery('.activities checkbox[name="all"]');
+  const $jsFrameworks =jQuery('.activities checkbox[name="js-frameworks"]');
+  const $jsLibs= jQuery('.activities checkbox[name="js-libs"]');
+  const $express= jQuery('.activities checkbox[name="express"]');
+  const $node= jQuery('.activities checkbox[name="node"]');
+  const $buildTools= jQuery('.activities checkbox[name="build-tools"]');
+  const $npm= jQuery('.activities checkbox[name="npm"]');
 
                      //FOCUS ON THE FIRST FIELD//
 //using jQuery (focus), have the cursor appear on the Name field
@@ -61,7 +68,13 @@ jQuery('#design').on('change',function(){
 
 
 
-//using jQuery(what?) to prevent users from selecting two or activities that are at the same time 
+//using jQuery function w/if conditions to prevent users from selecting two or activities that are at the same time 
+//jQuery('.activities').on('change',function(){
+//  if(jQuery(this).
+
+
+//  }
+//});
 
 
                              //ACTIVITY REGISTRATION//
@@ -69,11 +82,26 @@ jQuery('#design').on('change',function(){
 
 
                             //DISPLAYING PAYMENT SECTIONS// 
-//using a jQuery(addEventListener?) (add e) to select credit card by default [like now w/out changes]
+//using a jQuery (attr selected) to select credit card by default [like now w/out changes]
+jQuery('#payment option[value="Credit Card"]').attr("selected", "selected");
+jQuery('#paypal, #bitcoin').hide();
 
-//using a jQuery(function?) to match the payment option to payment option displayed on the page 
+//using a jQuery click to match the payment option selected to payment option displayed on the page. Only one 
 
-//something about hidden other payment options once user select a payment option 
+jQuery('#payment').on('change', function(e){
+  if(jQuery(e.target).val()==="Credit Card") {
+    jQuery('#credit-card').show();
+    jQuery('#paypal, #bitcoin').hide();
+  } else if(jQuery(e.target).val()==='PayPal'){
+    jQuery('#paypal').show();
+    jQuery('#credit-card, #bitcoin').hide();
+  }else if(jQuery(e.target).val()==='Bitcoin'){
+    jQuery('#bitcoin').show();
+    jQuery('#credit-card, #paypal').hide();
+  }
+  
+});
+
 
 
                             //FORM VALIDATION//
