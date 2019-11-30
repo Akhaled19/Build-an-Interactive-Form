@@ -85,6 +85,17 @@ select {
 	margin-bottom: 1.125em;	
 }
 
+label.invalid,
+legend.invalid {
+	color: red;
+	font-weight: bold;
+}
+
+input.invalid,
+input:focus.invalid{
+	border: 5px solid red;
+}
+
 input {
 	font-size: 1em;
 	font-weight: 500;
