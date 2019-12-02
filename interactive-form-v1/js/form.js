@@ -169,164 +169,102 @@ jQuery('#payment').on('change', function(e){
 });
 
                    //FORM VALIDATION
-//using regexp & :clicked method to prevent refreshing the page when SUBMIT button is clicked UNTIL ALL requirements have been filled 
+//using regexp & focusout() method to check for valid inputs
 
 
 //Part A, user input validation
 
 //Step 1, regexp validation
 //First, name can only have letters a-z. First and last name starts with capcase 
-function isValidName(name) {
-  return /^[A-Z][a-z]*\s[A-Z][a-z]*$/.test(name);
-}
+let isNameValid = false; //set name input value to false 
+$name.focusout(function(e) {
+  let $nameValid = jQuery($name).val();
+  let $nameReg= new RegExp('^[A-Z][a-z]*\s[A-Z][a-z]*$');
+  if(!$nameReg.test($nameValid)){
+    isNameValid = false; 
+    $name.css({backgroundColor: '#ff6666', border: "2px solid #ff0000"}).attr({placeholder: 'Please enter your first and last name'}); 
+} else {
+    isNameValid = true;
+    $name.css({backgroundColor: '#ff6666', border: "2px solid #ff0000"}).removeAttr({placeholder: 'Please enter your first and last name'}); 
+}    
+});
+
 //Second, email must be in a valid format
-function isValidEmail(email) {
-  return /^[^@]+@[^@.]+\.[a-z]+$/i.test(email);
-}
+let isEmailValid = false;
+$email.focusout(function(e){
+  let $emailValid = jQuery($email).val();
+  let $emailReg = new RegExp('^[^@]+@[^@.]+\.[a-z]+$/i');
+  if(!$emailReg.test($emailValid)) {
+    isEmailValid = false;
+    $email.css({backgroundColor: '#ff6666', border: "2px solid #ff0000"}).attr({placeholder: 'Please enter a valid email address'}); 
+  }else {
+    isEmailValid = true;
+    $email.css({backgroundColor: '#ff6666', border: "2px solid #ff0000"}).removeAttr({placeholder: 'Please enter a valid email address'}); 
+  }
+});
+ 
 //Third, credit card number must be valid-13 to 16 digits 
-function isValidCardNum(cardNum) {
-  return /^\d{13,16}$/.test(cardNum);
-}
+let isCardNumValid = false;
+$cardNum.focusout(function(e){
+  let $cardNumValid = jQuery($cardNum).val();
+  let $cardNumReg = new RegExp('^\d{13,16}$');
+  if(!$cardNumReg.test($cardNumValid)) {
+    isCardNumValid = false;
+    $cardNum.css({backgroundColor: '#ff6666', border: "2px solid #ff0000"}).attr({placeholder: 'Please enter a 13-16 digit number'});
+  }else {
+    isCardNumValid = true;
+    $cardNum.css({backgroundColor: '#ff6666', border: "2px solid #ff0000"}).removeAttr({placeholder: 'Please enter a 13-16 digit number'});
+  }
+}); 
+
 //Fourth, credit card zip number must be valid-5 digits
-function isValidZip(cardZip) {
-  return /^\d{5}$/.test(cardZip); 
-}
+let isZipNumValid = false;
+$zipNum.focusout(function(e){
+  let zipNumValid = jQuery($zipNum).val();
+  let zipNumReg = new RegExp('^\d{5}$');
+  if (!$zipNumReg.test(zipNumValid)) {
+    isCardNumValid = false;
+    $zipNum.css({backgroundColor: '#ff6666', border: "2px solid #ff0000"}).attr({placeholder: 'Please enter a 5 digit number'});
+  } else {
+    isCardNumValid = true;
+    $zipNum.css({backgroundColor: '#ff6666', border: "2px solid #ff0000"}).removeAttr({placeholder: 'Please enter a 5 digit number'});
+  }
+
 //Fifth, credit card cvv number must be valid-3 digits   
-function isValidCVV(cardCvv) {
-  return /^\d{3}$/.test(cardCvv);
-} 
+let isCvvNumValid = false;
+$cvvNum.focusout(function(e){
+  let $cvvNumValid = jQuery($cvvNum).val();
+  let $cvvNumReg = new RegExp('^\d{3}$');
+  if(!$cvvNumReg.test($cvvNumValid)) {
+    isCvvNumValid = false;
+    $cvvNum.css({backgroundColor: '#ff6666', border: "2px solid #ff0000"}).attr({placeholder: 'Please enter a 3 digit number'});
+  } else {
+    isCvvNumValid = true;
+    $cvvNum.css({backgroundColor: '#ff6666', border: "2px solid #ff0000"}).removeAttr({placeholder: 'Please enter a 3 digit number'});
+  }
+});  
 
 //Step 2, set up events
 
-//function used to show messages when felids are invalid or empty 
-function showOrHideTip(show, element) {
-  // show element when show is true, hide when false
-  if (show) {
-    element.style.display = "inherit";
-  } else {
-    element.style.display = "none";
-  }
-}
-//function used to listen to user input
-function createListener(validator) {
-  return e => {
-    const text = e.target.value;
-    const valid = validator(text);
-    const showTip = text !== "" && !valid;
-    const tooltip = e.target.nextElementSibling; 
-    showOrHideTip(showTip, tooltip);
-
-  }
-}
 //Event listeners on all five items(listed above)
-$name.addEventListener("input", createListener(isValidName));
-
-//$name.focusout(function(e){
- //   const nameformat= /^[A-Z][a-z]*\s[A-Z][a-z]*$/;
-    //check if name input is verified and not empty 
-   // if(!nameformat.test(jQuery('$name').val())){
-     // jQuery('input #name').addClass('invalid');  
-      //create a element with the class above 
-      //jQuery('label [for="name"]').html('Name:<br>[Please enter a first and last name]').addClass("invalid");   
-      
-    //} else{
-     // jQuery('input #name').removeClass('invalid');
-     // jQuery('label[for="name"]').html('Name:').removeClass('invalid');
-      
-
-  //  }
- // }); 
-  //function validEmail(){
-    //formated email 
-    //const emailFormat= /^[^@]+@[^@.]+\.[a-z]+$/i;
-    //check if email address is valid (name@email.com)
-    //if(!emailFormat.test(jQuery($email))){
-      // jQuery('input #mail').addClass('invalid');
-      // jQuery('label [for="mail"]').html('Email:<br>[Please enter a valid email address]').addClass("invalid");
-       //return false;
-     //} else{
-      // jQuery('input #mail').removeClass('invalid');
-      // jQuery('label [for="mail"]').html('Email:').removeClass("invalid");
-      // return true;
-    // }
-  // }
-  //at least one 'Register for Activities' checkbox is selected 
-  // function Validactivity() {
-
-  //if the activities selected is less than 0 
-  // if (jQuery('.activities input:checkbox:checked').length > 0) {
-  // create an invalid error
- //  jQuery('.checkbox legend').html('Register for Activities:<br> [You must at least select one activity]').addClass("invalid");
- //  return false;
- //  }else{
-  //   jQuery('.checkbox legend').html('Register for Activities:').removeClass("invalid");
-   //  return true;
-  // }
-  // }  
-                 //credit card payment option validation:  
-
- //credit card num field contains 13 to 16 DIGITs, 
- // function validCardNum() {
-  //  const cardNumFormat = /^\d{13,16}$/;
-   //if the card number does not equal to 13 to 16 digits  
-  // if (!cardNumFormat.test(jQuery($cardNum))) {
-     //create an invalid error
-     // jQuery('input #cc-num').addClass("invalid");
-     // jQuery('label [for="cc-num"]').html('Card Number:<br> [Please enter a credit card number between 13 to 16 numbers]').addClass("invalid");
-     //return false;
-     //remove invalid error
-    // } else {
-     //  jQuery('input #cc-num').removeClass("invalid");
-    //  jQuery('label [for="cc-num"]').html('Card Number:').removeClass("invalid");
-    //  return true;
-    // }
- // }
-//zip code contains  5-digit c, 
- //function validZip() {
-  // const zipNumFormat = /^\d{5}$/;
-  //if the zip number does not equal to 5 digits 
-  // if(!zipNumFormat.test(jQuery($zipNum))){
-    //create an invalid error
-  //   jQuery('input #zip').addClass("invalid");
-  //   jQuery('label [for="zip"]').html('Zip Code:<br>[Please enter a 5 digit number]').addClass("invalid");
-  // return false;
-  // }else {
-  //   jQuery('input #zip').removeClass("invalid");
-   //  jQuery('label [for="zip"]').html('Zip Code:').removeClass("invalid");
-  //   return true;
-  // } 
- //}
-
-//and cvv contains 3-digit
- //function validCVV() {
- //  const cvvFormat = /^\d{3}$/;
-  //if the cvv number does not equal to 3  digits 
-   //if (!cvvFormat.test(jQuery($cvvNum))) {
-    //create an invalid error
-   //  jQuery('input #cvv').addClass("invalid");
-    // jQuery('label [for="cvv"]').html('cvv:<br>[Please enter a 3 digit number]').addClass("invalid");
-    // return false;
-   //} else{
-    //remove an invalid error
-     //jQuery('input #cvv').removeClass("invalid");
-    // jQuery('label [for="cvv"]').html('cvv:').removeClass("invalid");
-    // return true;
-    
-  // }
- //}
 
 
- //$name.addEventListener("input", createListener(validName));
+//Part B, checkbox and other selectable options. Using on click handler (eventObject)  
 
+// First, at least one 'Register for Activities' checkbox is selected 
+let isCheckboxValid = false;
 
+jQuery('form').submit(function(e){
+  if(jQuery('.activities input:checkbox:checked').length < 1) {
+    //prevent page refresh on default 
+    e.preventDefault();
+    isCheckboxValid = false;
+    $errorDiv.show();
+  } else {
+    isCheckboxValid = true;
+  } 
+  if (!isNameValid || !isEmailValid || !isCardNumValid || !isZipNumValid || !isCvvNumValid) {
+    e.preventDefault(); 
+    jQuery('button [type="submit"]').attr("disabled", "disabled");
 
-                               //Form Validation Messages
-// same as above, but this is about filling out each filed (red until corrected)
-   //add a error message to each filed: the error message appears when the user begin to type & disappears later 
-   // add at least one error message that changes depending on the error. email field displays a different error message when the email field is empty than it does when the email address is formatted incorrectly.
-
-
-                            //Form Works Without JavaScript
-   //using the JQuery element that prevent web from breaking down when JS is disabled 
-     //all forms fields and payment information is displayed 
-     //including the 'other' field                          
+});
