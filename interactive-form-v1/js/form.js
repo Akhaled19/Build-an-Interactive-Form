@@ -20,7 +20,7 @@
   const $email = jQuery('input [name="user-name"]');
   const $cardNum = jQuery('input [name="user-cc-num"]');
   const $zipNum = jQuery('input [name="user-zip"]');
-  const $cvvNum = jQuery('input [name="user-cvv]');
+  const $cvvNum = jQuery('input [name="user-cvv"]');
 
                      //FOCUS ON THE FIRST FIELD//
 //using jQuery focus method to set the cursor on the Name field on page load
@@ -177,7 +177,7 @@ jQuery('#payment').on('change', function(e){
 //Step 1, regexp validation
 //First, name can only have letters a-z. First and last name starts with capcase 
 let isNameValid = false; //set name input value to false 
-$name.focusout(function(e) {
+$name.focusout((e) => {
   let $nameValid = jQuery($name).val();
   let $nameReg= new RegExp('^[A-Z][a-z]*\s[A-Z][a-z]*$');
   if(!$nameReg.test($nameValid)){
@@ -191,7 +191,7 @@ $name.focusout(function(e) {
 
 //Second, email must be in a valid format
 let isEmailValid = false;
-$email.focusout(function(e){
+$email.focusout((e)=> {
   let $emailValid = jQuery($email).val();
   let $emailReg = new RegExp('^[^@]+@[^@.]+\.[a-z]+$/i');
   if(!$emailReg.test($emailValid)) {
@@ -205,7 +205,7 @@ $email.focusout(function(e){
  
 //Third, credit card number must be valid-13 to 16 digits 
 let isCardNumValid = false;
-$cardNum.focusout(function(e){
+$cardNum.focusout((e)=> {
   let $cardNumValid = jQuery($cardNum).val();
   let $cardNumReg = new RegExp('^\d{13,16}$');
   if(!$cardNumReg.test($cardNumValid)) {
@@ -219,7 +219,7 @@ $cardNum.focusout(function(e){
 
 //Fourth, credit card zip number must be valid-5 digits
 let isZipNumValid = false;
-$zipNum.focusout(function(e){
+$zipNum.focusout((e) => {
   let zipNumValid = jQuery($zipNum).val();
   let zipNumReg = new RegExp('^\d{5}$');
   if (!$zipNumReg.test(zipNumValid)) {
@@ -229,10 +229,11 @@ $zipNum.focusout(function(e){
     isCardNumValid = true;
     $zipNum.css({backgroundColor: '#ff6666', border: "2px solid #ff0000"}).removeAttr({placeholder: 'Please enter a 5 digit number'});
   }
+});
 
 //Fifth, credit card cvv number must be valid-3 digits   
 let isCvvNumValid = false;
-$cvvNum.focusout(function(e){
+$cvvNum.focusout((e) => {
   let $cvvNumValid = jQuery($cvvNum).val();
   let $cvvNumReg = new RegExp('^\d{3}$');
   if(!$cvvNumReg.test($cvvNumValid)) {
@@ -254,7 +255,7 @@ $cvvNum.focusout(function(e){
 // First, at least one 'Register for Activities' checkbox is selected 
 let isCheckboxValid = false;
 
-jQuery('form').submit(function(e){
+jQuery('form').submit((e)=>{
   if(jQuery('.activities input:checkbox:checked').length < 1) {
     //prevent page refresh on default 
     e.preventDefault();
@@ -262,9 +263,10 @@ jQuery('form').submit(function(e){
     $errorDiv.show();
   } else {
     isCheckboxValid = true;
-  } 
+  }  
   if (!isNameValid || !isEmailValid || !isCardNumValid || !isZipNumValid || !isCvvNumValid) {
     e.preventDefault(); 
     jQuery('button [type="submit"]').attr("disabled", "disabled");
 
+  }
 });
