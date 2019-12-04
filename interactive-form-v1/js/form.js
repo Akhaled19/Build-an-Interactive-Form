@@ -200,7 +200,7 @@ $name.focusout((e)=>{
 let isEmailValid = false;
 $email.focusout((e)=> {
   let $emailValid = jQuery('#mail').val();
-  let $emailReg = new RegExp('^[^@]+@[^@.]+\.[a-z]+$/i');
+  let $emailReg = new RegExp('^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+[.][a-zA-Z]{2,5}$');
   if(!$emailReg.test($emailValid)) {
     isEmailValid = false;
     $email.css({backgroundColor: '#ff6666', border: "2px solid #ff0000"}).attr({placeholder: 'Please enter a valid email address'}); 
@@ -228,13 +228,13 @@ $creditCardNum.focusout((e)=> {
 let isZipNumValid = false;
 $zipCode.focusout((e) => {
   let $zipNumValid = jQuery('#zip').val();
-  let $zipNumReg = new RegExp('^\\d{5}$');
+  let $zipNumReg = new RegExp('^\d{5}$');
   if (!$zipNumReg.test($zipNumValid)) {
     isZipNumValid = false;
-    $zipCode.css({backgroundColor: '#ff6666', border: "2px solid #ff0000"}).attr({placeholder: 'Please enter a 5 digit number'});
+    $zipCode.css({backgroundColor: '#ff6666', border: "2px solid #ff0000"}).attr({placeholder: '5 digit number'});
   } else {
     isZipNumValid = true;
-    $zipCode.css({backgroundColor: '#ff6666', border: "2px solid #ff0000"}).removeAttr({placeholder: 'Please enter a 5 digit number'});
+    $zipCode.css({backgroundColor: '#ff6666', border: "2px solid #ff0000"}).removeAttr({placeholder: '5 digit number'});
   }
 });
 
@@ -245,10 +245,10 @@ $cvv.focusout((e) => {
   let $cvvNumReg = new RegExp('^\d{3}$');
   if(!$cvvNumReg.test($cvvNumValid)) {
     isCvvNumValid = false;
-    $cvv.css({backgroundColor: '#ff6666', border: "2px solid #ff0000"}).attr({placeholder: 'Please enter a 3 digit number'});
+    jQuery($cvv.css({backgroundColor: '#ff6666', border: "2px solid #ff0000"}).attr({placeholder: '3 digit number'}));
   } else {
     isCvvNumValid = true;
-    $cvv.css({backgroundColor: '#ff6666', border: "2px solid #ff0000"}).removeAttr({placeholder: 'Please enter a 3 digit number'});
+    jQuery($cvv.css({backgroundColor: '#ff6666', border: "2px solid #ff0000"}).removeAttr({placeholder: '3 digit number'}));
   }
 });  
 
@@ -281,12 +281,10 @@ jQuery('button').on('click',((e)=>{
    if (!isNameValid) {$name.css({backgroundColor: '#ff6666', border: "2px solid #ff0000"}).attr({placeholder: 'Please enter your name'})};
    if (!isEmailValid) {$email.css({backgroundColor: '#ff6666', border: "2px solid #ff0000"}).attr({placeholder: 'Please enter a valid email address'})};
    if (!isCreditCardValid) {$creditCardNum.css({backgroundColor: '#ff6666', border: "2px solid #ff0000"}).attr({placeholder: 'Credit Card Number needs to be 13-16 digits'})};
-   if (!isZipValid) {$zipCode.css({backgroundColor: '#ff6666', border: "2px solid #ff0000"}).attr({placeholder: '5 digits'})};
-   if (!isCvvValid) {$cvv.css({backgroundColor: '#ff6666', border: "2px solid #ff0000"}).attr({placeholder: '3 digits'})};
+   if (!isZipValid) {$zipCode.css({backgroundColor: '#ff6666', border: "2px solid #ff0000"}).attr({placeholder: '5 digit number'})};
+   if (!isCvvValid) {$cvv.css({backgroundColor: '#ff6666', border: "2px solid #ff0000"}).attr({placeholder: '3 digit number'})};
    jQuery('button [type="submit"]').attr("disabled", "disabled");
 
   }
 }
 ));
-
-//Part c, 
