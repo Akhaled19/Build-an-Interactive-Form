@@ -1,4 +1,11 @@
 //Global variables(goes by sections)
+  const $name = jQuery('#name');
+  const $email = jQuery('#mail');
+  const $creditCardNum = jQuery('#cc-num');
+  const $zipCode = jQuery('#zip');
+  const $cvv = jQuery('#cvv');
+  const $submit = jQuery('#submitButton');
+
   const $cornflowerblue = jQuery('#color option[value="cornflowerblue"]');
   const $darkslategrey = jQuery('#color option[value="darkslategrey"]');
   const $gold = jQuery('#color option[value="gold"]');
@@ -16,15 +23,15 @@
   const $creditCard = jQuery('#payment option[value="Credit Card"]');
   const $selectPaymentMethod = jQuery('#payment option[value="select method"]');
   
-  const $name = jQuery('input [name="user-name"]');
-  const $email = jQuery('input [name="user-name"]');
-  const $cardNum = jQuery('input [name="user-cc-num"]');
-  const $zipNum = jQuery('input [name="user-zip"]');
-  const $cvvNum = jQuery('input [name="user-cvv"]');
+  const $nameInput = jQuery('input [name="user-name"]');
+  const $emailInput = jQuery('input [name="user-name"]');
+  const $cardNumInput = jQuery('input [name="user-cc-num"]');
+  const $zipNumInput = jQuery('input [name="user-zip"]');
+  const $cvvNumInput = jQuery('input [name="user-cvv"]');
 
                      //FOCUS ON THE FIRST FIELD//
 //using jQuery focus method to set the cursor on the Name field on page load
-jQuery('#name').focus();
+jQuery($name).focus();
 
                           //JOB ROLE SECTION//
 // first using jQuery hide method to hide the other title input field. a new element (text field) when user select 'other' from the Job Role menu 
@@ -177,9 +184,9 @@ jQuery('#payment').on('change', function(e){
 //Step 1, regexp validation
 //First, name can only have letters a-z. First and last name starts with capcase 
 let isNameValid = false; //set name input value to false 
-$name.focusout((e) => {
-  let $nameValid = jQuery($name).val();
-  let $nameReg= new RegExp('^[A-Z][a-z]*\s[A-Z][a-z]*$');
+$name.focusout((e)=>{
+  let $nameValid = jQuery('#name').val();
+  let $nameReg= new RegExp('^[a-zA-Z]+ [a-zA-Z]+$');
   if(!$nameReg.test($nameValid)){
     isNameValid = false; 
     $name.css({backgroundColor: '#ff6666', border: "2px solid #ff0000"}).attr({placeholder: 'Please enter your first and last name'}); 
@@ -192,7 +199,7 @@ $name.focusout((e) => {
 //Second, email must be in a valid format
 let isEmailValid = false;
 $email.focusout((e)=> {
-  let $emailValid = jQuery($email).val();
+  let $emailValid = jQuery('#mail').val();
   let $emailReg = new RegExp('^[^@]+@[^@.]+\.[a-z]+$/i');
   if(!$emailReg.test($emailValid)) {
     isEmailValid = false;
@@ -205,57 +212,62 @@ $email.focusout((e)=> {
  
 //Third, credit card number must be valid-13 to 16 digits 
 let isCardNumValid = false;
-$cardNum.focusout((e)=> {
-  let $cardNumValid = jQuery($cardNum).val();
+$creditCardNum.focusout((e)=> {
+  let $cardNumValid = jQuery('#cc-num').val();
   let $cardNumReg = new RegExp('^\d{13,16}$');
   if(!$cardNumReg.test($cardNumValid)) {
     isCardNumValid = false;
-    $cardNum.css({backgroundColor: '#ff6666', border: "2px solid #ff0000"}).attr({placeholder: 'Please enter a 13-16 digit number'});
+    $creditCardNum.css({backgroundColor: '#ff6666', border: "2px solid #ff0000"}).attr({placeholder: 'Please enter a 13-16 digit number'});
   }else {
     isCardNumValid = true;
-    $cardNum.css({backgroundColor: '#ff6666', border: "2px solid #ff0000"}).removeAttr({placeholder: 'Please enter a 13-16 digit number'});
+    $creditCardNum.css({backgroundColor: '#ff6666', border: "2px solid #ff0000"}).removeAttr({placeholder: 'Please enter a 13-16 digit number'});
   }
 }); 
 
 //Fourth, credit card zip number must be valid-5 digits
 let isZipNumValid = false;
-$zipNum.focusout((e) => {
-  let zipNumValid = jQuery($zipNum).val();
-  let zipNumReg = new RegExp('^\d{5}$');
-  if (!$zipNumReg.test(zipNumValid)) {
-    isCardNumValid = false;
-    $zipNum.css({backgroundColor: '#ff6666', border: "2px solid #ff0000"}).attr({placeholder: 'Please enter a 5 digit number'});
+$zipCode.focusout((e) => {
+  let $zipNumValid = jQuery('#zip').val();
+  let $zipNumReg = new RegExp('^\\d{5}$');
+  if (!$zipNumReg.test($zipNumValid)) {
+    isZipNumValid = false;
+    $zipCode.css({backgroundColor: '#ff6666', border: "2px solid #ff0000"}).attr({placeholder: 'Please enter a 5 digit number'});
   } else {
-    isCardNumValid = true;
-    $zipNum.css({backgroundColor: '#ff6666', border: "2px solid #ff0000"}).removeAttr({placeholder: 'Please enter a 5 digit number'});
+    isZipNumValid = true;
+    $zipCode.css({backgroundColor: '#ff6666', border: "2px solid #ff0000"}).removeAttr({placeholder: 'Please enter a 5 digit number'});
   }
 });
 
 //Fifth, credit card cvv number must be valid-3 digits   
 let isCvvNumValid = false;
-$cvvNum.focusout((e) => {
-  let $cvvNumValid = jQuery($cvvNum).val();
+$cvv.focusout((e) => {
+  let $cvvNumValid = jQuery('#cvv').val();
   let $cvvNumReg = new RegExp('^\d{3}$');
   if(!$cvvNumReg.test($cvvNumValid)) {
     isCvvNumValid = false;
-    $cvvNum.css({backgroundColor: '#ff6666', border: "2px solid #ff0000"}).attr({placeholder: 'Please enter a 3 digit number'});
+    $cvv.css({backgroundColor: '#ff6666', border: "2px solid #ff0000"}).attr({placeholder: 'Please enter a 3 digit number'});
   } else {
     isCvvNumValid = true;
-    $cvvNum.css({backgroundColor: '#ff6666', border: "2px solid #ff0000"}).removeAttr({placeholder: 'Please enter a 3 digit number'});
+    $cvv.css({backgroundColor: '#ff6666', border: "2px solid #ff0000"}).removeAttr({placeholder: 'Please enter a 3 digit number'});
   }
 });  
 
-//Step 2, set up events
 
-//Event listeners on all five items(listed above)
+//Step 2, if credit card wasn't selected 
+jQuery('#payment').on('change', function() {
+  if(jQuery(this).val() === "paypal" || "bitcoin") {
+    isCardNumValid = true;
+    isCvvNumValid = true;
+    isZipNumValid = true;
+  }
+})
 
-
-//Part B, checkbox and other selectable options. Using on click handler (eventObject)  
+//Part B, checkbox and other selectable options. Using on click handler (eventObject) on form button
 
 // First, at least one 'Register for Activities' checkbox is selected 
 let isCheckboxValid = false;
 
-jQuery('form').submit((e)=>{
+jQuery('button').on('click',((e)=>{
   if(jQuery('.activities input:checkbox:checked').length < 1) {
     //prevent page refresh on default 
     e.preventDefault();
@@ -265,8 +277,16 @@ jQuery('form').submit((e)=>{
     isCheckboxValid = true;
   }  
   if (!isNameValid || !isEmailValid || !isCardNumValid || !isZipNumValid || !isCvvNumValid) {
-    e.preventDefault(); 
-    jQuery('button [type="submit"]').attr("disabled", "disabled");
+   e.preventDefault(); 
+   if (!isNameValid) {$name.css({backgroundColor: '#ff6666', border: "2px solid #ff0000"}).attr({placeholder: 'Please enter your name'})};
+   if (!isEmailValid) {$email.css({backgroundColor: '#ff6666', border: "2px solid #ff0000"}).attr({placeholder: 'Please enter a valid email address'})};
+   if (!isCreditCardValid) {$creditCardNum.css({backgroundColor: '#ff6666', border: "2px solid #ff0000"}).attr({placeholder: 'Credit Card Number needs to be 13-16 digits'})};
+   if (!isZipValid) {$zipCode.css({backgroundColor: '#ff6666', border: "2px solid #ff0000"}).attr({placeholder: '5 digits'})};
+   if (!isCvvValid) {$cvv.css({backgroundColor: '#ff6666', border: "2px solid #ff0000"}).attr({placeholder: '3 digits'})};
+   jQuery('button [type="submit"]').attr("disabled", "disabled");
 
   }
-});
+}
+));
+
+//Part c, 
