@@ -24,7 +24,7 @@
   const $selectPaymentMethod = jQuery('#payment option[value="select method"]');
   
   const $nameInput = jQuery('input [name="user-name"]');
-  const $emailInput = jQuery('input [name="user-name"]');
+  const $emailInput = jQuery('input [name="user-email"]');
   const $cardNumInput = jQuery('input [name="user-cc-num"]');
   const $zipNumInput = jQuery('input [name="user-zip"]');
   const $cvvNumInput = jQuery('input [name="user-cvv"]');
@@ -192,7 +192,7 @@ $name.focusout((e)=>{
     $name.css({backgroundColor: '#ff6666', border: "2px solid #ff0000"}).attr({placeholder: 'Please enter your first and last name'}); 
 } else {
     isNameValid = true;
-    $name.css({backgroundColor: '#ff6666', border: "2px solid #ff0000"}).removeAttr({placeholder: 'Please enter your first and last name'}); 
+    $name.css({backgroundColor: '#e9f6fb', border: "2px solid #e9f6fb"}).removeAttr({placeholder: 'Please enter your first and last name'}); 
 }    
 });
 
@@ -206,7 +206,7 @@ $email.focusout((e)=> {
     $email.css({backgroundColor: '#ff6666', border: "2px solid #ff0000"}).attr({placeholder: 'Please enter a valid email address'}); 
   }else {
     isEmailValid = true;
-    $email.css({backgroundColor: '#ff6666', border: "2px solid #ff0000"}).removeAttr({placeholder: 'Please enter a valid email address'}); 
+    $email.css({backgroundColor: '#e9f6fb', border: "2px solid #e9f6fb"}).removeAttr({placeholder: 'Please enter a valid email address'}); 
   }
 });
  
@@ -214,13 +214,13 @@ $email.focusout((e)=> {
 let isCardNumValid = false;
 $creditCardNum.focusout((e)=> {
   let $cardNumValid = jQuery('#cc-num').val();
-  let $cardNumReg = new RegExp('^\d{13,16}$');
+  let $cardNumReg = new RegExp('^\\d{13,16}$');
   if(!$cardNumReg.test($cardNumValid)) {
     isCardNumValid = false;
     $creditCardNum.css({backgroundColor: '#ff6666', border: "2px solid #ff0000"}).attr({placeholder: 'Please enter a 13-16 digit number'});
   }else {
     isCardNumValid = true;
-    $creditCardNum.css({backgroundColor: '#ff6666', border: "2px solid #ff0000"}).removeAttr({placeholder: 'Please enter a 13-16 digit number'});
+    $creditCardNum.css({backgroundColor: '#e9f6fb', border: "2px solid #e9f6fb"}).removeAttr({placeholder: 'Please enter a 13-16 digit number'});
   }
 }); 
 
@@ -228,13 +228,13 @@ $creditCardNum.focusout((e)=> {
 let isZipNumValid = false;
 $zipCode.focusout((e) => {
   let $zipNumValid = jQuery('#zip').val();
-  let $zipNumReg = new RegExp('^\d{5}$');
+  let $zipNumReg = new RegExp('^\\d{5}$');
   if (!$zipNumReg.test($zipNumValid)) {
     isZipNumValid = false;
     $zipCode.css({backgroundColor: '#ff6666', border: "2px solid #ff0000"}).attr({placeholder: '5 digit number'});
   } else {
     isZipNumValid = true;
-    $zipCode.css({backgroundColor: '#ff6666', border: "2px solid #ff0000"}).removeAttr({placeholder: '5 digit number'});
+    $zipCode.css({backgroundColor: '#e9f6fb', border: "2px solid #e9f6fb"}).removeAttr({placeholder: '5 digit number'});
   }
 });
 
@@ -242,13 +242,13 @@ $zipCode.focusout((e) => {
 let isCvvNumValid = false;
 $cvv.focusout((e) => {
   let $cvvNumValid = jQuery('#cvv').val();
-  let $cvvNumReg = new RegExp('^\d{3}$');
+  let $cvvNumReg = new RegExp('^\\d{3}$');
   if(!$cvvNumReg.test($cvvNumValid)) {
     isCvvNumValid = false;
     jQuery($cvv.css({backgroundColor: '#ff6666', border: "2px solid #ff0000"}).attr({placeholder: '3 digit number'}));
   } else {
     isCvvNumValid = true;
-    jQuery($cvv.css({backgroundColor: '#ff6666', border: "2px solid #ff0000"}).removeAttr({placeholder: '3 digit number'}));
+    jQuery($cvv.css({backgroundColor: '#e9f6fb', border: "2px solid #e9f6fb"}).removeAttr({placeholder: '3 digit number'}));
   }
 });  
 
@@ -288,3 +288,5 @@ jQuery('button').on('click',((e)=>{
   }
 }
 ));
+
+//Part C, email error message in real time, 
