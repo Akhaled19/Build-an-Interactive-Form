@@ -334,14 +334,14 @@ jQuery('#mail').on('input', (e) => {
 
   //checks conditions and display error messages with html span 
   if(validStart) {
-    jQuery('label [for="mail"]').html('Email:<br><span>Missing "@" and "."</span>').addClass('invalid');
- 
+    jQuery('label[for="mail"]').html('Email:<br><span>Missing "@" and "."</span>').addClass('invalid');
+
   } else if (validAt) {
-    jQuery('label [for="mail"]').html('Email:<br><span>Missing "."</span>').addClass('invalid');
+    jQuery('label[for="mail"]').html('Email:<br><span>Missing "."</span>').addClass('invalid');
   
   }else if (validDot) {
     jQuery('input #mail').removeClass('invalid');
-    jQuery('label [for="mail"]').html('Email: ').removeClass('invalid');
+    jQuery('label[for="mail"]').html('Email: ').removeClass('invalid');
   }
 
 });
