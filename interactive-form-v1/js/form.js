@@ -23,11 +23,7 @@
   const $creditCard = jQuery('#payment option[value="Credit Card"]');
   const $selectPaymentMethod = jQuery('#payment option[value="select method"]');
   
-  const $nameInput = jQuery('input [name="user-name"]');
-  const $emailInput = jQuery('input [name="user-email"]');
-  const $cardNumInput = jQuery('input [name="user-cc-num"]');
-  const $zipNumInput = jQuery('input [name="user-zip"]');
-  const $cvvNumInput = jQuery('input [name="user-cvv"]');
+
 
                      //FOCUS ON THE FIRST FIELD//
 //using jQuery focus method to set the cursor on the Name field on page load
@@ -36,6 +32,7 @@ jQuery($name).focus();
                           //JOB ROLE SECTION//
 // first using jQuery hide method to hide the other title input field. a new element (text field) when user select 'other' from the Job Role menu 
 jQuery('#other-title').hide();
+
 //then, using jQuery on change handler (eventObject) on the job role drop down menu to reveal the other title input field
 jQuery('#title').on('change', function(){
   if(jQuery(this).val()==='other') {
@@ -48,6 +45,7 @@ jQuery('#title').on('change', function(){
                              //T-SHIRT SECTION//
 //using jQuery attr method to disable color options until t-shirt theme is selected
 jQuery('#color').attr('disabled', 'disabled');
+
 //& the color filed reads "Please select a T-shirt theme" 
 jQuery('#color').prepend('<option value="select a theme" selected="selected">Please select a T-shirt theme</option>');
 
@@ -64,6 +62,7 @@ jQuery('#design').on('change',function(){
     jQuery($gold).show();
     jQuery($darkslategrey).show();
     jQuery($cornflowerblue).show();
+
   //else if If the user selects "Theme - I ♥ JS" - the color menu should display the following: "Tomato," "Steel Blue," and "Dim Grey."
   }else if(jQuery(this).val()==='heart js'){
     jQuery('#color').attr('disabled', false);
@@ -73,6 +72,7 @@ jQuery('#design').on('change',function(){
     jQuery($dimgrey).show();
     jQuery($steelblue).show();
     jQuery($tomato).show();
+
   //else disabled the select t-shirt color menu  
   }else{
     jQuery('#color').attr('disabled', 'disabled');
@@ -80,7 +80,7 @@ jQuery('#design').on('change',function(){
 });
 
                     //ACTIVITY REGISTRATION//
-//using jQuery on change handler (eventObject) w/if & else conditions to prevent users from selecting two or activities that are at the same time 
+//using jQuery on change handler (eventObject) w/if & else conditions to prevent users from selecting two or more activities with the same time & date
 
 // first, JavaScript Frameworks 
 jQuery($jsFrameworks).on('change',function(){
@@ -119,6 +119,7 @@ jQuery($node).on('change',function(e){
                  //COST
 // created a div to display cost 
 jQuery('.activities').append('<br><div class="costDiv"></div>');
+
 // created a div to display error 
 jQuery('.activities').append('<br><div class="errorDiv"><font color="#ff0000">Please select an activity.</div>');                  
 
@@ -136,7 +137,7 @@ $costDiv.hide();
 //using a jQuery on change handler (eventObject) w/ click event method to calculate & displays the cost of the selected activities right below the list 
 jQuery('.activities').on('change', function(e) {
     let $target = jQuery(e.target);
-    let $dataCost = parseInt($target.attr('data-cost').slice(-3)); //parsing the input clicked to an intege
+    let $dataCost = parseInt($target.attr('data-cost').slice(-3)); //parsing the input clicked to an integer
     if ($target.is(':checked')) { //activity will be added if checked
       $costDiv.show();
       $errorDiv.hide();
@@ -163,12 +164,15 @@ jQuery($selectPaymentMethod).attr("disabled", "disabled");
 //using a jQuery change handler (eventObject) to match the payment option selected to payment option displayed on the page. 
 jQuery('#payment').on('change', function(e){
   let $target = jQuery(e.target);
+
   if(jQuery($target).val()==="Credit Card") {
     jQuery('#credit-card').show();
     jQuery('#paypal, #bitcoin').hide();
+
   } else if(jQuery($target).val()==='PayPal'){
     jQuery('#paypal').show();
     jQuery('#credit-card, #bitcoin').hide();
+
   }else if(jQuery($target).val()==='Bitcoin'){
     jQuery('#bitcoin').show();
     jQuery('#credit-card, #paypal').hide();
@@ -187,9 +191,11 @@ let isNameValid = false; //set name input value to false
 $name.focusout((e)=>{
   let $nameValid = jQuery('#name').val();
   let $nameReg= new RegExp('^[a-zA-Z]+ [a-zA-Z]+$');
+
   if(!$nameReg.test($nameValid)){
     isNameValid = false; 
     $name.css({backgroundColor: '#ff6666', border: "2px solid #ff0000"}).attr({placeholder: 'Please enter your first and last name'}); 
+
 } else {
     isNameValid = true;
     $name.css({backgroundColor: '#e9f6fb', border: "2px solid #e9f6fb"}).removeAttr({placeholder: 'Please enter your first and last name'}); 
@@ -201,9 +207,11 @@ let isEmailValid = false;
 $email.focusout((e)=> {
   let $emailValid = jQuery('#mail').val();
   let $emailReg = new RegExp('^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+[.][a-zA-Z]{2,5}$');
+
   if(!$emailReg.test($emailValid)) {
     isEmailValid = false;
     $email.css({backgroundColor: '#ff6666', border: "2px solid #ff0000"}).attr({placeholder: 'Please enter a valid email address'}); 
+
   }else {
     isEmailValid = true;
     $email.css({backgroundColor: '#e9f6fb', border: "2px solid #e9f6fb"}).removeAttr({placeholder: 'Please enter a valid email address'}); 
@@ -215,9 +223,11 @@ let isCardNumValid = false;
 $creditCardNum.focusout((e)=> {
   let $cardNumValid = jQuery('#cc-num').val();
   let $cardNumReg = new RegExp('^\\d{13,16}$');
+
   if(!$cardNumReg.test($cardNumValid)) {
     isCardNumValid = false;
     $creditCardNum.css({backgroundColor: '#ff6666', border: "2px solid #ff0000"}).attr({placeholder: 'Please enter a 13-16 digit number'});
+
   }else {
     isCardNumValid = true;
     $creditCardNum.css({backgroundColor: '#e9f6fb', border: "2px solid #e9f6fb"}).removeAttr({placeholder: 'Please enter a 13-16 digit number'});
@@ -229,9 +239,11 @@ let isZipNumValid = false;
 $zipCode.focusout((e) => {
   let $zipNumValid = jQuery('#zip').val();
   let $zipNumReg = new RegExp('^\\d{5}$');
+
   if (!$zipNumReg.test($zipNumValid)) {
     isZipNumValid = false;
     $zipCode.css({backgroundColor: '#ff6666', border: "2px solid #ff0000"}).attr({placeholder: '5 digit number'});
+
   } else {
     isZipNumValid = true;
     $zipCode.css({backgroundColor: '#e9f6fb', border: "2px solid #e9f6fb"}).removeAttr({placeholder: '5 digit number'});
@@ -243,9 +255,11 @@ let isCvvNumValid = false;
 $cvv.focusout((e) => {
   let $cvvNumValid = jQuery('#cvv').val();
   let $cvvNumReg = new RegExp('^\\d{3}$');
+
   if(!$cvvNumReg.test($cvvNumValid)) {
     isCvvNumValid = false;
     jQuery($cvv.css({backgroundColor: '#ff6666', border: "2px solid #ff0000"}).attr({placeholder: '3 digit number'}));
+
   } else {
     isCvvNumValid = true;
     jQuery($cvv.css({backgroundColor: '#e9f6fb', border: "2px solid #e9f6fb"}).removeAttr({placeholder: '3 digit number'}));
@@ -273,20 +287,61 @@ jQuery('button').on('click',((e)=>{
     e.preventDefault();
     isCheckboxValid = false;
     $errorDiv.show();
+
   } else {
     isCheckboxValid = true;
   }  
+
   if (!isNameValid || !isEmailValid || !isCardNumValid || !isZipNumValid || !isCvvNumValid) {
    e.preventDefault(); 
    if (!isNameValid) {$name.css({backgroundColor: '#ff6666', border: "2px solid #ff0000"}).attr({placeholder: 'Please enter your name'})};
    if (!isEmailValid) {$email.css({backgroundColor: '#ff6666', border: "2px solid #ff0000"}).attr({placeholder: 'Please enter a valid email address'})};
-   if (!isCreditCardValid) {$creditCardNum.css({backgroundColor: '#ff6666', border: "2px solid #ff0000"}).attr({placeholder: 'Credit Card Number needs to be 13-16 digits'})};
-   if (!isZipValid) {$zipCode.css({backgroundColor: '#ff6666', border: "2px solid #ff0000"}).attr({placeholder: '5 digit number'})};
-   if (!isCvvValid) {$cvv.css({backgroundColor: '#ff6666', border: "2px solid #ff0000"}).attr({placeholder: '3 digit number'})};
+   if (!isCardNumValid) {$creditCardNum.css({backgroundColor: '#ff6666', border: "2px solid #ff0000"}).attr({placeholder: 'Credit Card Number needs to be 13-16 digits'})};
+   if (!isZipNumValid) {$zipCode.css({backgroundColor: '#ff6666', border: "2px solid #ff0000"}).attr({placeholder: '5 digit number'})};
+   if (!isCvvNumValid) {$cvv.css({backgroundColor: '#ff6666', border: "2px solid #ff0000"}).attr({placeholder: '3 digit number'})};
    jQuery('button [type="submit"]').attr("disabled", "disabled");
 
   }
 }
 ));
 
-//Part C, email error message in real time, 
+//Part C, email error message in real time
+
+//isStartValid function checks for initial input (without @)
+const isStartValid = (input) => {
+  const initialReg = new RegExp('^[^@]+$');
+  return initialReg.test(input);
+}
+
+//isAtValid function checks for at '@' symbol at the end
+const isAtValid = (input) => {
+  const secondReg = new RegExp('^[^@]+@$');
+  return secondReg.test(input);
+}
+
+//isDotValid function checks for dot '.' symbol after a-z & '@' symbol
+const isDotValid = (input) => {
+  const thirdReg = new RegExp('^[^@]+@[a-zA-Z0-9]+[.]$');
+  return thirdReg.test(input);
+}
+
+//sets a listener on user email input to run real time error messages
+jQuery('#mail').on('input', (e) => {
+  const target = e.target.value;
+  const validStart = isStartValid(target);
+  const validAt = isAtValid(target);
+  const validDot = isDotValid(target);
+
+  //checks conditions and display error messages with html span 
+  if(validStart) {
+    jQuery('label [for="mail"]').html('Email:<br><span>Missing "@" and "."</span>').addClass('invalid');
+ 
+  } else if (validAt) {
+    jQuery('label [for="mail"]').html('Email:<br><span>Missing "."</span>').addClass('invalid');
+  
+  }else if (validDot) {
+    jQuery('input #mail').removeClass('invalid');
+    jQuery('label [for="mail"]').html('Email: ').removeClass('invalid');
+  }
+
+});
