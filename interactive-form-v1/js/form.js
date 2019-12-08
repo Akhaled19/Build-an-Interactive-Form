@@ -44,10 +44,10 @@ jQuery('#title').on('change', function(){
 
                              //T-SHIRT SECTION//
 //using jQuery attr method to disable color options until t-shirt theme is selected
-jQuery('#color').attr('disabled', 'disabled');
+jQuery('#color').hide();
 
 //& the color filed reads "Please select a T-shirt theme" 
-jQuery('#color').prepend('<option value="select a theme" selected="selected">Please select a T-shirt theme</option>');
+jQuery('#color').prepend('<option value="select a t-shirt color" selected="selected">Please select a T-shirt theme</option>');
 
 
 //using jQuery on change handler (eventObject) to show color options once t-shirt theme is selected 
@@ -55,28 +55,43 @@ jQuery('#color').prepend('<option value="select a theme" selected="selected">Ple
 jQuery('#design').on('change',function(){
   //If the user selects "Theme - JS Puns"- the color menu should display the following: "Cornflower Blue," "Dark Slate Grey," and "Gold."
   if(jQuery(this).val()==='js puns'){
-    jQuery('#color').attr('disabled', false);
+    jQuery('#color').show();
     jQuery($dimgrey).hide();
     jQuery($steelblue).hide();
     jQuery($tomato).hide();
     jQuery($gold).show();
     jQuery($darkslategrey).show();
     jQuery($cornflowerblue).show();
+    jQuery('option:selected').removeAttr("selected");
+    jQuery('[value="select a theme"]').attr("selected", true);
+    function unselect(){
+      $.each(jQuery('#color option:selected'), function() {
+        $(this).prop('selected', false);
+      }); 
+    } 
 
   //else if If the user selects "Theme - I ♥ JS" - the color menu should display the following: "Tomato," "Steel Blue," and "Dim Grey."
   }else if(jQuery(this).val()==='heart js'){
-    jQuery('#color').attr('disabled', false);
+    jQuery('#color').show();
     jQuery($gold).hide();
     jQuery($darkslategrey).hide();
     jQuery($cornflowerblue).hide();
     jQuery($dimgrey).show();
     jQuery($steelblue).show();
     jQuery($tomato).show();
+    function unselect(){
+      $.each(jQuery('#color option:selected'), function() {
+        $(this).prop('selected', false);
+      }); 
+    }  
+    //jQuery(this).prop("selected", false);
+   // jQuery('[value="select a theme"]').attr("selected", true);
 
   //else disabled the select t-shirt color menu  
   }else{
-    jQuery('#color').attr('disabled', 'disabled');
+    jQuery('#color').hide();
   }
+  unselect();
 });
 
                     //ACTIVITY REGISTRATION//
@@ -294,7 +309,7 @@ jQuery('button').on('click',((e)=>{
 
   if (!isNameValid || !isEmailValid || !isCardNumValid || !isZipNumValid || !isCvvNumValid) {
    e.preventDefault(); 
-   if (!isNameValid) {$name.css({backgroundColor: '#ff6666', border: "2px solid #ff0000"}).attr({placeholder: 'Please enter your name'})};
+   if (!isNameValid) {$name.css({backgroundColor: '#ff6666', border: "2px solid #ff0000"}).attr({placeholder: 'Please enter your first and last name'})};
    if (!isEmailValid) {$email.css({backgroundColor: '#ff6666', border: "2px solid #ff0000"}).attr({placeholder: 'Please enter a valid email address'})};
    if (!isCardNumValid) {$creditCardNum.css({backgroundColor: '#ff6666', border: "2px solid #ff0000"}).attr({placeholder: 'Credit Card Number needs to be 13-16 digits'})};
    if (!isZipNumValid) {$zipCode.css({backgroundColor: '#ff6666', border: "2px solid #ff0000"}).attr({placeholder: '5 digit number'})};
