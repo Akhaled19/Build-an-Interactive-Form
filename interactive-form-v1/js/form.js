@@ -47,7 +47,7 @@ jQuery('#title').on('change', function(){
 jQuery('#color').hide();
 
 //& the color filed reads "Please select a T-shirt theme" 
-jQuery('#color').prepend('<option value="select a t-shirt color" selected="selected">Please select a T-shirt theme</option>');
+jQuery('#color').prepend('<option value="select a t-shirt color" selected="selected">Please select a T-shirt color</option>');
 
 
 //using jQuery on change handler (eventObject) to show color options once t-shirt theme is selected 
@@ -84,9 +84,6 @@ jQuery('#design').on('change',function(){
         $(this).prop('selected', false);
       }); 
     }  
-    //jQuery(this).prop("selected", false);
-   // jQuery('[value="select a theme"]').attr("selected", true);
-
   //else disabled the select t-shirt color menu  
   }else{
     jQuery('#color').hide();
