@@ -1,7 +1,8 @@
-# Unit3-Build an Interactive Form
+# Build an Interactive Form
 
 Azal Khaled's List Pagination and Filtering Project 3 as a TeamTreehouse Full Stack JavaScript Talent Path student.
 This project uses jQuery
+
 ## App Discription
 * The interactive user-friendly form uses customized, conditional behavior, and interactivity. 
 * The form also validates user input and provide helpful error messages when the user enters invalid information into the form fields. Some real time validation
